@@ -49,8 +49,7 @@ select emp_no, dept_no
   from dept_emp
  where dept_no in ('d005', 'd009');
  
--- 예제4: like 검색: employees 테이블에서 1989년에 입사한 직원들의 이름
---                입사일을 출력
+-- 예제4: like 검색: employees 테이블에서 1989년에 입사한 직원들의 이름, 입사일을 출력
 select first_name, hire_date
   from employees
  where '1989-01-01' <= hire_date
