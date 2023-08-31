@@ -4,7 +4,8 @@
 -- 현재 평균 연봉보다 많은 월급을 받는 직원은 몇 명이나 있습니까?
 select count(*)
   from salaries a
- where a.salary > (select avg(salary)
+ where a.to_date = '9999-01-01'
+   and a.salary > (select avg(salary)
 					 from salaries a
 				    where a.to_date = '9999-01-01');
 
@@ -63,6 +64,7 @@ select a.emp_no, a.first_name, d.title, b.salary
    and c.emp_no = d.emp_no
    and b.to_date = '9999-01-01'
    and c.to_date = '9999-01-01'
+   and d.to_date = '9999-01-01'
    and c.dept_no = (    select a.dept_no
 						  from dept_emp a, departments b, salaries c
 					     where a.emp_no = c.emp_no
@@ -77,7 +79,7 @@ select a.emp_no, a.first_name, d.title, b.salary
 														 and a.to_date = '9999-01-01'
 														 and b.to_date = '9999-01-01'
 													group by b.dept_no) a))
-order by salary asc;
+order by salary desc;
       
 -- 문제6.
 -- 평균 연봉이 가장 높은 부서는? 
