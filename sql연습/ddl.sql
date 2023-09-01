@@ -34,3 +34,27 @@ desc member;
 --
 -- dml
 --
+
+-- insert
+insert
+  into member
+values (null, 'sjg3234@gmail.com', password('1234'), '서정권', '개발팀', null);
+select * from member;
+
+insert
+  into member(email, name, dept, password)
+values ('sjg32344@gmail.com', '서정권4', '개발팀4', password('1234'));
+select * from member;
+
+-- update
+update member
+   set email='kixxcar@gmail.com', name='킥스카'
+ where no = 4;
+ select * from member;
+ 
+-- delete
+delete
+  from member
+ where no = 4;
+select * from member;
+
