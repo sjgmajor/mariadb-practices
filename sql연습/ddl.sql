@@ -58,3 +58,18 @@ delete
  where no = 4;
 select * from member;
 
+-- transactio begin
+set autocommit = 0;
+select @@autocommit from dual;
+
+insert
+  into member(email, name, dept, password)
+values ('sjg32344@gmail.com', '서정권4', '개발팀4', password('1234'));
+
+select no, email, dept from member;
+
+commit;
+
+select no, email, dept from member;
+
+select * from member;
