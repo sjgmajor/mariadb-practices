@@ -121,16 +121,22 @@ having avg(c.salary) = (select max(a.avg_salary)
 -- 문제8.(순수 join 문제)
 -- 현재 자신의 매니저보다 높은 연봉을 받고 있는 직원은?
 -- 부서이름, 사원이름, 연봉, 매니저 이름, 메니저 연봉 순으로 출력합니다.
-select d.dept_name, a.first_name, b.salary, e.manager_name, e.manager_salary
-  from employees a
-  join salaries b on a.emp_no = b.emp_no and b.to_date = '9999-01-01'
-  join dept_emp c on b.emp_no = c.emp_no and c.to_date = '9999-01-01'
-  join departments d on c.dept_no = d.dept_no
-  join (  select e.dept_no, d.first_name manager_name, c.salary manager_salary
-		    from dept_manager a
-            join dept_emp b on a.dept_no = b.dept_no and a.emp_no = b.emp_no and a.to_date = '9999-01-01'
-            join salaries c on b.emp_no = c.emp_no and b.to_date = '9999-01-01'
-            join employees d on c.emp_no = d.emp_no and c.to_date = '9999-01-01'
-            join departments e on b.dept_no = e.dept_no) e
-where d.dept_no = e.dept_no
-  and b.salary > e.manager_salary;
+select e.dept_name, a.first_name, c.salary, f.first_name, g.salary
+  from employees a,
+       dept_emp b, 
+       salaries c,
+       dept_manager d,
+       departments e,
+       employees f,
+       salaries g
+ where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and b.dept_no = d.dept_no
+   and c.to_date = '9999-01-01'
+   and b.emp_no = c.emp_no
+   and d.to_date = '9999-01-01'
+   and d.dept_no = e.dept_no
+   and d.emp_no = f.emp_no
+   and f.emp_no = g.emp_no
+   and g.to_date = '9999-01-01'
+   and c.salary > g.salary;
