@@ -8,7 +8,7 @@ public class MemberDaoTest {
 	private static void insertTest() {
 		BookDao dao = new BookDao();
 		
-		dao.inser(bookVo);
+		dao.insert(bookVo);
 		dao.insert(bookNo);
 		
 	}
