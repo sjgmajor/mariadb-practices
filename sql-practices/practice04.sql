@@ -36,6 +36,7 @@ select a.emp_no, a.first_name, b.salary
    and c.to_date = '9999-01-01'
    and d.dept_no = c.dept_no
    and b.salary > d.avg_salary;
+   
 
 -- 문제4.
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
