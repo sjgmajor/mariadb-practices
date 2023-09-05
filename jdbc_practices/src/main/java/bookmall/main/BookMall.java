@@ -1,5 +1,7 @@
 package bookmall.main;
 
+import bookmall.dao.MemberDao;
+
 public class BookMall {
 
 	public static void main(String[] args) {
@@ -9,6 +11,7 @@ public class BookMall {
 		
 		System.out.println("## 회원리스트");
 		//2 member
+		MemberDao.displaymember();
 		
 		System.out.println("## 카테고리");
 		//3 category
