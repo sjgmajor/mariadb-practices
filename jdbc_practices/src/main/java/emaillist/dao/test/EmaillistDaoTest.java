@@ -10,12 +10,12 @@ public class EmaillistDaoTest {
 	public static void main(String[] args) {
 		EmaillistVo vo = new EmaillistVo();
 		vo.setFirstName("둘");
-		vo.setLastName("리3");
-		vo.setEmail("dooly3@gmail.com");
+		vo.setLastName("리2");
+		vo.setEmail("dooly2@gmail.com");
 		
 		testInsert(vo);
 		testFindAll();
-		testDeletByEmail("dooly3@gmail.com");
+		testDeletByEmail("dooly2@gmail.com");
 		testFindAll();
 	}
 
