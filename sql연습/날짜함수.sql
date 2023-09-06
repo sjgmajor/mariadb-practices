@@ -1,3 +1,6 @@
+insert into guestbook values(null, 'a', 'a', 'a', curdate());
+select * from guestbook;
+
 -- 
 -- 날짜 함수
 --
