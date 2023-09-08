@@ -1,9 +1,17 @@
 package bookmall.vo;
 
 public class CartVo {
+	private Long cartNo;
 	private Long quantity;
 	private Long bookNo;
 	private Long memberNo;
+	
+	public Long getCartNo() {
+		return cartNo;
+	}
+	public void setCartNo(Long cartNo) {
+		this.cartNo = cartNo;
+	}
 	
 	public Long getQuantity() {
 		return quantity;

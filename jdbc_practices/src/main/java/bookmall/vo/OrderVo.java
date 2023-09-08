@@ -4,6 +4,14 @@ public class OrderVo {
 	private Long orderNo;
 	private Long memberNo;
 	private String address;
+	private Long totalPrice;
+	
+	public Long getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public Long getOrderNo() {
 		return orderNo;
 	}
@@ -24,7 +32,7 @@ public class OrderVo {
 	}
 	@Override
 	public String toString() {
-		return "OrderVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", address=" + address + "]";
+		return "OrderVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", address=" + address
+				+ ", totalPrice=" + totalPrice + "]";
 	}
-	
 }

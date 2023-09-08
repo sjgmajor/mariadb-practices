@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.main.BookMall;
 import bookmall.vo.BookVo;
 
 public class BookDao {
@@ -17,7 +18,7 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			String sql = "select a.title , a.price from book a";
 			pstmt = conn.prepareStatement(sql);
 
@@ -58,7 +59,7 @@ public class BookDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			
 			String sql = "insert into book values(null, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -69,7 +70,6 @@ public class BookDao {
 			
 			pstmt.executeQuery();
 			
-			System.out.println("[" + vo.getTitle() + "]도서가 등록되었습니다.");
 
 			} catch (SQLException e) {
 				System.out.println("error: " + e);
@@ -93,9 +93,9 @@ public class BookDao {
 		ResultSet rs = null;
 		Long bookNo = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			String sql = 
-					" select a.book_No" +
+					" select a.book_no" +
 					"   from book a" +
 					"  where a.title=?";
 			pstmt = conn.prepareStatement(sql);
@@ -131,16 +131,20 @@ public class BookDao {
 		ResultSet rs = null;
 		List<BookVo> result = new ArrayList<>();
 		try {
-			conn = MemberDao.getConnection();
+			
+			conn = BookMall.getConnection();
+			
 			String sql = 
 					" select a.title, a.price, a.category_no" +
 					"   from book a" +
 					"  where a.book_no=?";
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setLong(1,bookNo);
 			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 
 				String title = rs.getString(1);
@@ -158,7 +162,6 @@ public class BookDao {
 			System.out.println("error: " + e);
 		} finally {
 			try {
-				//7. 자원정리
 				if(pstmt != null) {
 					pstmt.close();
 				}

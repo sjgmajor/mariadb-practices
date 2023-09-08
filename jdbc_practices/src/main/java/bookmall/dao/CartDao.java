@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.main.BookMall;
 import bookmall.vo.CartVo;
-import bookmall.vo.MemberVo;
 
 public class CartDao {
 
@@ -16,9 +16,9 @@ public class CartDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			
-			String sql = "insert into cart values(?, ?, ?)";
+			String sql = "insert into cart values(null, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, vo.getQuantity());
@@ -51,11 +51,12 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			String sql = 
-					" select a.quantity, a.book_no" +
+					" select a.cart_no, a.quantity, a.book_no" +
 					"   from cart a" +
 					"  where a.member_no=?";
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setLong(1, no);
@@ -63,11 +64,12 @@ public class CartDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-
-				Long quantity = rs.getLong(1);
-				Long bookNo = rs.getLong(2);
+				Long cartNo = rs.getLong(1);
+				Long quantity = rs.getLong(2);
+				Long bookNo = rs.getLong(3);
 				
 				CartVo vo = new CartVo();
+				vo.setCartNo(cartNo);
 				vo.setQuantity(quantity);
 				vo.setBookNo(bookNo);
 				
@@ -101,19 +103,20 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = MemberDao.getConnection();
-			String sql = "select a.quantity, a.book_no, a.member_no from member a;";
+			conn = BookMall.getConnection();
+			String sql = "select a.cart_no, a.quantity, a.book_no, a.member_no from member a;";
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				
-				Long quantity = rs.getLong(1);
-				Long bookNo = rs.getLong(2);
-				Long memberNo = rs.getLong(3);
+				Long cartNo = rs.getLong(1);
+				Long quantity = rs.getLong(2);
+				Long bookNo = rs.getLong(3);
+				Long memberNo = rs.getLong(4);
 				
 				CartVo vo = new CartVo();
+				vo.setCartNo(cartNo);
 				vo.setQuantity(quantity);
 				vo.setBookNo(bookNo);
 				vo.setMemberNo(memberNo);

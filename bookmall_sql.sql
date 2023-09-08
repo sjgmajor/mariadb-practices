@@ -1,3 +1,45 @@
+update orders 
+set total_price = 5
+where order_no = 1;
+
+select * from orders;
+
+
+select * from order_book;
+
+select a.book_no, c.title, a.quantity
+from order_book a join orders b on b.order_no = a.orders_no
+join book c on a.book_no = c.book_no
+where substring_index(a.orders_no,'-',1)=3;
+
+select substring_index(a.order_no, '-',-1)
+from orders a;
+select a.order_no
+from orders a;
+
+
+select * from order_book;
+
+
+select a.cart_no
+from cart a
+where a.member_no=1;
+
+select * from book;
+select * from category;
+select * from member;
+
+select a.no
+from member a
+where a.name = '서정권';
+                    
+select a.order_no, a.member_no, a.address, a.total_price
+from orders a, member b, order_book c, book d
+where a.order_no = c.order_no
+and c.book_no = d.book_no
+and a.
+
+
 # category
 desc category;
 insert into category values(null, '소설');
@@ -58,15 +100,8 @@ update order_book a set a.price = b.price, a.quantity = c.quantity
 select * from order_book;
 
 # orders
-select
-concat(date_format(curdate(), '%Y%m%d'), '', a.order_no) '주문번호',
-b.name '주문자 이름',
-b.email '주문자 이메일',
-c.quantity * c.price '결제금액',
-a.address '배송지'
-from orders a, member b, order_book c, cart d
-where a.member_no = b.no
-and a.order_no = c.orders_no;
+select concat(date_format(curdate(), '%Y%m%d'), '-', a.order_no) '주문번호', b.name, b.email, a.address, a.total_price from orders a join member b on a.member_no = b.no
+where a.member_no = 3;
 
 select a.book_no 
 from book a

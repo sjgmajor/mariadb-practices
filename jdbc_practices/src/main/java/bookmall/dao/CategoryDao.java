@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bookmall.main.BookMall;
 import bookmall.vo.CategoryVo;
 
 public class CategoryDao {
@@ -17,7 +18,7 @@ public class CategoryDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			String sql = "select a.category_No, a.name from category a";
 			pstmt = conn.prepareStatement(sql);
 
@@ -59,7 +60,7 @@ public class CategoryDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = MemberDao.getConnection();
+			conn = BookMall.getConnection();
 			
 			String sql = "insert into category values(null, ?)";
 			pstmt = conn.prepareStatement(sql);
@@ -69,7 +70,6 @@ public class CategoryDao {
 			//4. SQL 실행
 			pstmt.executeQuery();
 			
-			System.out.println("[" + vo.getName() + "]카테고리가 등록되었습니다.");
 
 			} catch (SQLException e) {
 				System.out.println("error: " + e);
@@ -86,5 +86,43 @@ public class CategoryDao {
 				System.out.println("error: " + e);
 			}
 		}
+	}
+
+	public Long findNoByName(String categoryName) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Long categoryNo = null;
+		try {
+			conn = BookMall.getConnection();
+			String sql = 
+					" select a.category_no" +
+					"   from category a" +
+					"  where a.name=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1,categoryName);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				categoryNo = rs.getLong(1);
+			}			
+		} catch (SQLException e) {
+			System.out.println("error: " + e);
+		} finally {
+			try {
+				//7. 자원정리
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return categoryNo;
 	}
 }
