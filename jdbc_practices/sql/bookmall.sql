@@ -36,8 +36,7 @@ where a.name = '서정권';
 select a.order_no, a.member_no, a.address, a.total_price
 from orders a, member b, order_book c, book d
 where a.order_no = c.order_no
-and c.book_no = d.book_no
-and a.
+and c.book_no = d.book_no;
 
 
 # category
@@ -88,14 +87,8 @@ desc order_book;
 insert into order_book values(2, 1, null, null);
 insert into order_book values(3, 2, null, null);
 
-update order_book a set a.price = b.price, a.quantity = c.quantity
-   from book b
- join cart c
- on a.book_no = b.book_no
- on b.book_no = c.book_no
- on a.price = b.price
- on a.quantity = c.quantity
- where a.book_no = a.;
+update order_book a set a.price = 1000
+ where a.book_no = b.book_no;
  
 select * from order_book;
 
