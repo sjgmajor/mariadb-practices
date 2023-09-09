@@ -8,28 +8,30 @@ import bookmall.vo.CategoryVo;
 public class CategoryDaoTest {
 
 	public static void main(String[] args) {
-		CategoryVo vo = new CategoryVo();
-		vo.setName("소설");		
-		testInsert(vo);
+		// category
+		//카테고리 이름 입력
+		categoryInsert("소설");
+		categoryInsert("과학");
+		categoryInsert("예술");
 		
-		vo.setName("과학");
-		testInsert(vo);
-		
-		vo.setName("예술");
-		testInsert(vo);
-		
-		testFindAll();
+		System.out.println("## 카테고리");
+		categoryDisplay();
 	}
 
-	private static void testFindAll() {
-		List<CategoryVo> list = new CategoryDao().findAll();
-		for(CategoryVo vo : list) {
+	private static void categoryInsert(String name) {
+		CategoryDao categoryDao = new CategoryDao();
+		CategoryVo categoryVo = new CategoryVo();
+
+		categoryVo.setName(name);
+		categoryDao.insert(categoryVo);
+	}
+
+	private static void categoryDisplay() {
+		List<CategoryVo> categoryList = new CategoryDao().findAll();
+		for(CategoryVo vo : categoryList) {
 			System.out.println(vo);
 		}
 	}
 
-	private static void testInsert(CategoryVo vo) {
-		new CategoryDao().insert(vo);
-	}
 
 }

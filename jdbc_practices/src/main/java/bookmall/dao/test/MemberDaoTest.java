@@ -8,30 +8,30 @@ import bookmall.vo.MemberVo;
 public class MemberDaoTest {
 	
 	public static void main(String[] args) {
-		MemberVo vo = new MemberVo();
-		vo.setName("서정권");
-		vo.setTel("010-1234-5678");
-		vo.setEmail("sjg1@gmail.com");
-		vo.setPassword("1234");
-		testInsert(vo);
+		// member
+		//이름, 전화번호, 이메일, 비밀번호 입력
+		memberInsert("서정권", "010-1234-5678", "sjg1@gmail.com", "1234");
+		memberInsert("권정서", "010-5678-1234", "1sjg@naver.com", "5678");
 		
-		vo.setName("권정서");
-		vo.setTel("010-5678-1234");
-		vo.setEmail("1sjg@naver.com");
-		vo.setPassword("5678");
-		testInsert(vo);
-		
-		testFindAll();
+		System.out.println("## 회원리스트");
+		memberDisplay();
 	}
 
-	private static void testFindAll() {
-		List<MemberVo> list = new MemberDao().findAll();
-		for(MemberVo vo : list) {
+	private static void memberInsert(String name, String tel, String email, String password) {
+		MemberDao memberDao = new MemberDao();
+		MemberVo memberVo = new MemberVo();
+
+		memberVo.setName(name);
+		memberVo.setTel(tel);
+		memberVo.setEmail(email);
+		memberVo.setPassword(password);
+		memberDao.insert(memberVo);
+	}
+
+	private static void memberDisplay() {
+		List<MemberVo> memberList = new MemberDao().findAll();
+		for(MemberVo vo : memberList) {
 			System.out.println(vo);
 		}
-	}
-
-	private static void testInsert(MemberVo vo) {
-		new MemberDao().insert(vo);
 	}
 }

@@ -4,6 +4,7 @@ where order_no = 1;
 
 select * from orders;
 
+
 select * from order_book;
 
 select a.book_no, c.title, a.quantity
@@ -35,10 +36,12 @@ where a.name = '서정권';
 select a.order_no, a.member_no, a.address, a.total_price
 from orders a, member b, order_book c, book d
 where a.order_no = c.order_no
-and c.book_no = d.book_no;
+and c.book_no = d.book_no
+and a.
 
 
 # category
+desc category;
 insert into category values(null, '소설');
 insert into category values(null, '과학');
 insert into category values(null, '예술');
@@ -84,9 +87,15 @@ insert into orders values(null, 2, '서울특별시 서초구 서초중앙로28�
 desc order_book;
 insert into order_book values(2, 1, null, null);
 insert into order_book values(3, 2, null, null);
-select * from order_book;
 
-
+update order_book a set a.price = b.price, a.quantity = c.quantity
+   from book b
+ join cart c
+ on a.book_no = b.book_no
+ on b.book_no = c.book_no
+ on a.price = b.price
+ on a.quantity = c.quantity
+ where a.book_no = a.;
  
 select * from order_book;
 
